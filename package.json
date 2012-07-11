@@ -1,0 +1,30 @@
+{
+    "name" : "fnoc", 
+    "version" : "0.0.1",
+    "description" : "A a simple module to load config files.",
+    "homepage" : [
+        "https://github.com/jprichardson/node-fnoc"
+    ],
+    "repository" : {
+        "type" : "git", 
+        "url" : "https://github.com/jprichardson/node-fnoc"
+    },
+    "keywords" : ["fnoc", "configure", "conf", "config"],
+    "author" : "JP Richardson <jprichardson@gmail.com>",
+    "licenses" : [ {
+        "type" : "MIT",
+        "url" : "http://github.com/jprichardson/node-fnoc/raw/master/LICENSE"
+    }],
+    "dependencies" : {
+        "fs-extra": "0.1.x"
+     },
+     "devDepdencies":{
+        "mocha": "1.1.x",
+        "coffee-script": "1.3.x",
+        "testutil": "0.2.x"
+    },
+    "main" : "./lib/fnoc",
+    "scripts": {
+        "test": "mocha test"
+    }
+}
