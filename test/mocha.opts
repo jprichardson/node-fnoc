@@ -3,4 +3,4 @@
 --growl
 --compilers coffee:coffee-script
 --timeout 5000
---globals __fnoc
+--globals __fnoc,__fnocEnv

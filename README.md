@@ -39,6 +39,49 @@ console.log(configs.package.name); //YOUR PACKAGE NAME
 
 It will not load nor crash if a JSON file can't be parsed.
 
+
+Now Let's assume that your database configuration file looks like this:
+
+```javascript
+{
+    "development": {
+        "name": "myapp_development",
+        "host": "127.0.0.1",
+        "port": 27017
+    },
+    "test": {
+        "name": "myapp_test",
+        "host": "127.0.0.1",
+        "port": 27017
+    },
+    "production": {
+        "name": "myapp_production",
+        "host": "myserver.com",
+        "port": 27017
+    }
+}
+```
+
+Now if you call the `env()` method:
+
+```javascript
+var configs = require('fnoc').env()
+console.log(configs.database.name); //output depending upon NODE_ENV
+```
+
+Test Environment:
+
+    NODE_ENV=test node myapp.js
+
+yields...
+
+```javascript
+console.log(configs.database.name); //myapp_test
+```
+
+You can still access regular JSON config files that do not have environment specific keys such as `package.json`. If the file has the environment key, it's chopped to only that configuration information.
+
+
 Test
 ----
 
