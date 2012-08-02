@@ -1,3 +1,8 @@
+0.1.0 / 2012-08-02
+------------------
+* Fixed bug that wouldn't allow configurations to load if you ran your app outside of the base directory.
+* Replaced behavior `require('fnoc')` with `require('fnoc').configs()`.
+
 0.0.2 / 2012-07-18
 ------------------
 * Added `env()` method.

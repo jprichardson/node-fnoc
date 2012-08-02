@@ -6,6 +6,7 @@ Node.js - fnoc
 Your Node.js process must run in the root of your app as `fnoc` uses `process.cwd()` to determine what files to load. It loads all JSON files in the current directory and any that exist in `./conf` or `./config`. 
 
 
+
 Installation
 ------------
 
@@ -28,7 +29,7 @@ Let's assume that you have a database configuration file named `database.json` i
 You can then include `fnoc` and it will automatically load this file. If `fnoc` is included in more than one module, it will not load the modules more than once.
 
 ```javascript
-var configs = require('fnoc');
+var configs = require('fnoc').configs();
 
 console.log(configs.database.host); //localhost
 console.log(configs.database.port); //27017
@@ -65,7 +66,7 @@ Now Let's assume that your database configuration file looks like this:
 Now if you call the `env()` method:
 
 ```javascript
-var configs = require('fnoc').env()
+var configs = require('fnoc').configs().env()
 console.log(configs.database.name); //output depending upon NODE_ENV
 ```
 
@@ -82,6 +83,7 @@ console.log(configs.database.name); //myapp_test
 You can still access regular JSON config files that do not have environment specific keys such as `package.json`. If the file has the environment key, it's chopped to only that configuration information.
 
 
+
 Test
 ----
 
@@ -91,9 +93,12 @@ or...
 
     mocha test
 
+
+
 License
 -------
 
 Licensed under MIT. See `LICENSE` for more details.
 
 Copyright (c) 2012 JP Richardson
+

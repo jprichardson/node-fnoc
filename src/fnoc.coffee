@@ -1,17 +1,17 @@
 path = require('path')
 fs = require('fs-extra')
+packpath = require('packpath')
 
-if global.__fnoc? #if config files already been loaded once, don't load again... this might be uncessary
-  module.exports = global.__fnoc
-else
-  dirs = ['./', './config', './conf']
+configs = ->
+  dirs = ['./', './config', './conf', "./configs"]
   jsonFiles = []
-  fnoc = global.__fnoc = {}
+  fnoc = {}
+  packageDir = packpath.parent()
 
   for dir in dirs
-    newDir = path.join(process.cwd(), dir)
+    newDir = path.join(packageDir, dir)
 
-    if fs.existsSync(dir)
+    if fs.existsSync(newDir)
       paths = fs.readdirSync newDir
       for p in paths
         if p is 'env.json'
@@ -28,25 +28,25 @@ else
               console.log "fnoc: JSON parse error on file #{p}"
             key = path.basename(p, '.json')
             fnoc[key] = jsonObj
-
+  
   fnoc.env = ->
-    if global.__fnocEnv?
-      return global.__fnocEnv
-    else
+    #if global.__fnocEnv?
+    #  return global.__fnocEnv
+    #else
       if process.env.NODE_ENV? and typeof process.env.NODE_ENV is 'string' and process.env.NODE_ENV.length > 0
         currentEnv = process.env.NODE_ENV
       else
         currentEnv = 'development'
       
-      env = global.__fnocEnv = {}
+      env = {}
       for packageName,obj of fnoc
         if fnoc.hasOwnProperty(packageName)
           #console.log packageName + ":\n" + JSON.stringify(obj, null, 4)
           env[packageName] = obj
           if obj? and obj[currentEnv]?
-            console.log 'got one: ' + packageName
             env[packageName] = obj[currentEnv]
-      return global.__fnocEnv
+      return env
 
-  module.exports = global.__fnoc
+  fnoc
        
+module.exports.configs = configs
