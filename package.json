@@ -29,7 +29,7 @@
   },
   "main": "./lib/fnoc",
   "scripts": {
-    "test": "NODE_ENV=test mocha test"
+    "test": "mocha test"
   },
   "devDependencies": {
     "mocha": "~1.4.2",
