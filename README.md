@@ -1,9 +1,16 @@
+[![build status](https://secure.travis-ci.org/jprichardson/node-fnoc.png)](http://travis-ci.org/jprichardson/node-fnoc)
+
 Node.js - fnoc
 =====================
 
-`fnoc` is `conf` backwards. This module automatically and synchronously loads JSON configuration files.
+`fnoc` is `conf` backwards. This module automatically loads JSON configuration files. It first finds your `package.json` file and considers that the root directory of the package, the `packageDir`. This enables you to have multiple modules that also use `fnoc`. It then looks for any JSON files in the `packageDir` and in `#{packageDir}/conf`, `#{packageDir}/config`, `#{packageDir}/configs`.
 
-Your Node.js process must run in the root of your app as `fnoc` uses `process.cwd()` to determine what files to load. It loads all JSON files in the current directory and any that exist in `./conf` or `./config`. 
+
+
+Why?
+----
+
+Because loading JSON writing logic to read JSON configuration files over and over is annoying. Also, I wanted a module that could load JSON config files relative to the module path and not the current directory.
 
 
 
@@ -26,19 +33,41 @@ Let's assume that you have a database configuration file named `database.json` i
 }
 ```
 
-You can then include `fnoc` and it will automatically load this file. If `fnoc` is included in more than one module, it will not load the modules more than once.
+Require the `fnoc` function:
 
 ```javascript
-var configs = require('fnoc').configs();
+var fnoc = require('fnoc');
 
-console.log(configs.database.host); //localhost
-console.log(configs.database.port); //27017
 
-//automatically loads package.json
-console.log(configs.package.name); //YOUR PACKAGE NAME
+fnoc(function(err, configs) {
+  console.log(configs.database.host); //localhost
+  console.log(configs.database.port); //27017
+
+  //automatically loads package.json
+  console.log(configs.package.name); //YOUR PACKAGE NAME
+})
 ```
 
-It will not load nor crash if a JSON file can't be parsed.
+It will not load nor crash if a JSON file can't be parsed. Instead, the `err` variable in the callback is `null` if no errors exist or it's an object with the file name as key and the `Error` object as the value.
+
+So, let's say you have the file: `/tmp/malformed.json`
+
+**malformed.json**:
+
+```json
+{
+    this is NOT valid JSON
+}
+```
+
+Load `malformed.json`:
+
+```javascript
+var fnoc = require('fnoc');
+
+fnoc(function(err, configs) {
+  console.log(err['/tmp/malformed.json']) //string representation of the error
+})
 
 
 Now Let's assume that your database configuration file looks like this:
@@ -66,9 +95,15 @@ Now Let's assume that your database configuration file looks like this:
 Now if you call the `env()` method:
 
 ```javascript
-var configs = require('fnoc').configs().env()
-console.log(configs.database.name); //output depending upon NODE_ENV
+var fnoc = require('fnoc');
+
+fnoc(function(err, configs) {
+  var envConfigs = configs.env();
+  console.log(envConfigs.database.name); //output depending upon NODE_ENV   
+});
+
 ```
+
 
 Test Environment:
 
@@ -80,18 +115,12 @@ yields...
 console.log(configs.database.name); //myapp_test
 ```
 
-You can still access regular JSON config files that do not have environment specific keys such as `package.json`. If the file has the environment key, it's chopped to only that configuration information.
 
 
+Author
+------
 
-Test
-----
-
-    npm test
-
-or...
-
-    mocha test
+`node-batchflow` was written by [JP Richardson][aboutjp]. You should follow him on Twitter [@jprichardson][twitter]. Also read his coding blog [Procbits][procbits]. If you write software with others, you should checkout [Gitpilot][gitpilot] to make collaboration with Git simple.
 
 
 
@@ -101,4 +130,12 @@ License
 Licensed under MIT. See `LICENSE` for more details.
 
 Copyright (c) 2012 JP Richardson
+
+
+[aboutjp]: http://about.me/jprichardson
+[twitter]: http://twitter.com/jprichardson
+[procbits]: http://procbits.com
+[gitpilot]: http://gitpilot.com
+
+
 
