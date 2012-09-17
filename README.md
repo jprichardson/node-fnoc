@@ -48,6 +48,9 @@ fnoc(function(err, configs) {
 })
 ```
 
+
+### Errors
+
 It will not load nor crash if a JSON file can't be parsed. Instead, the `err` variable in the callback is `null` if no errors exist or it's an object with the file name as key and the `Error` object as the value.
 
 So, let's say you have the file: `/tmp/malformed.json`
@@ -70,6 +73,8 @@ fnoc(function(err, configs) {
 })
 ```
 
+
+### Environment
 
 Now Let's assume that your database configuration file looks like this:
 
@@ -105,7 +110,6 @@ fnoc(function(err, configs) {
 
 ```
 
-
 Test Environment:
 
     NODE_ENV=test node myapp.js
@@ -114,6 +118,24 @@ yields...
 
 ```javascript
 console.log(configs.database.name); //myapp_test
+```
+
+### Parsing Time Strings
+
+Parsing time strings is also support using [ms.js](https://github.com/guille/ms.js).
+
+**myconfig.json:**
+
+```json
+{
+  "timeout": "5s"
+}
+```
+
+would parse to:
+
+```javascript
+console.log(configs.myconfig.timeout); //5000
 ```
 
 
