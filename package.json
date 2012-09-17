@@ -34,6 +34,7 @@
   "devDependencies": {
     "mocha": "~1.4.2",
     "testutil": "~0.2.2",
-    "path-extra": "0.0.x"
+    "path-extra": "0.0.x",
+    "autoresolve": "0.0.3"
   }
 }

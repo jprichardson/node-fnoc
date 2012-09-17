@@ -1,6 +1,7 @@
 var testutil = require('testutil')
   , path = require('path-extra')
-  , fm = require('./node_modules/faux-module');
+  , P = require('autoresolve')
+  , fm = require(P('test/node_modules/faux-module'));
 
 OWD = process.cwd();
 
