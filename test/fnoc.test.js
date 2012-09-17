@@ -1,6 +1,6 @@
 var testutil = require('testutil')
   , path = require('path-extra')
-  , fm = require('faux-module');
+  , fm = require('./node_modules/faux-module');
 
 OWD = process.cwd();
 
