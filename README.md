@@ -10,7 +10,7 @@ Node.js - fnoc
 Why?
 ----
 
-Because loading JSON writing logic to read JSON configuration files over and over is annoying. Also, I wanted a module that could load JSON config files relative to the module path and not the current directory.
+Because writing logic to read JSON configuration files over and over is annoying. Also, I wanted a module that could load JSON config files relative to the module path and not the current directory.
 
 
 
