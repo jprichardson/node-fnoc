@@ -23,9 +23,9 @@
     }
   ],
   "dependencies": {
-    "fs-extra": "~0.2.1",
     "packpath": "0.0.x",
-    "batchflow": "~0.2.0"
+    "batchflow": "~0.2.0",
+    "ms": "~0.3.0"
   },
   "main": "./lib/fnoc",
   "scripts": {

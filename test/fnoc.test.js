@@ -61,6 +61,15 @@ describe('fnoc', function() {
       })
     })
 
+    it('should automatically parse time strings', function (done) {
+      fm.getConfigs(function (err, configs) {
+        T (err)
+
+        T (configs.shopping.timeout === 5000)
+        done();
+      })
+    })
+
 
   })
 })
