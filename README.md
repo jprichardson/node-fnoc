@@ -1,4 +1,4 @@
-[![build status](https://secure.travis-ci.org/jprichardson/node-fnoc.png)](http://travis-ci.org/jprichardson/node-fnoc)
+
 
 Node.js - fnoc
 =====================
