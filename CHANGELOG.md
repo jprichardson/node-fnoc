@@ -1,3 +1,9 @@
+0.2.1 / 2012-09-17
+------------------
+* Removed Travis-CI integration.
+* Removed `fs-extra` dep.
+* Added time string parsing.
+
 0.2.0 / 2012-09-17
 ------------------
 * Rewrote module to be async.
