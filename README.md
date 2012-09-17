@@ -68,6 +68,7 @@ var fnoc = require('fnoc');
 fnoc(function(err, configs) {
   console.log(err['/tmp/malformed.json']) //string representation of the error
 })
+```
 
 
 Now Let's assume that your database configuration file looks like this:
