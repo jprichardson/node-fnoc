@@ -1,6 +1,6 @@
 {
   "name": "fnoc",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A a simple module to load config files.",
   "homepage": [
     "https://github.com/jprichardson/node-fnoc"

@@ -1,3 +1,9 @@
+0.2.2 / 2013-01-23
+-------------------
+* Upgraded `batchflow` dep.
+* Fixed would be bug if dir ends with `.json`.
+* Upgraded `testutil` dep.
+
 0.2.1 / 2012-09-17
 ------------------
 * Removed Travis-CI integration.
