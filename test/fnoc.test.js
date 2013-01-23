@@ -13,6 +13,7 @@ describe('fnoc', function() {
         T (err)
         T (err[malformedJsonPath]) //error on parsing file
         
+        //console.dir(configs)
         T (configs.package)
         T (configs.shopping)
         T (configs.database)
@@ -48,7 +49,7 @@ describe('fnoc', function() {
     })
 
     it('should load the environment specific valid config files', function (done) {
-      T (process.env.NODE_ENV === 'test')
+      EQ (process.env.NODE_ENV, 'test')
       fm.getConfigs(function (err, configs) {
         T (err)
 
